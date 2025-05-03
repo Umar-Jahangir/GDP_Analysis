@@ -1,0 +1,138 @@
+/* Base Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f7fa;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+}
+
+/* Form Styles */
+.input-section {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+input[type="number"], select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button, .btn-pdf, .btn-back {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+button:hover, .btn-pdf:hover, .btn-back:hover {
+    background-color: #2980b9;
+}
+
+/* Results Styles */
+.visualizations {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.visualizations img {
+    max-width: 100%;
+    border: 1px solid #eee;
+}
+
+.scorecard {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.grade-a+ { color: #27ae60; }
+.grade-a { color: #2ecc71; }
+.grade-b+ { color: #f39c12; }
+.grade-b { color: #e67e22; }
+.grade-c { color: #d35400; }
+.grade-d { color: #c0392b; }
+
+/* Comparison Section */
+.comparison-section {
+    margin-top: 40px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.comparison-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+#country-select {
+    flex-grow: 1;
+    padding: 8px;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .visualizations img {
+        width: 100%;
+    }
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Results - GDP Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <style>
+        .no-forecast {
+            color: #666;
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>GDP Analysis Results</h1>
+
+        <div class="actions">
+            <a href="/generate-pdf?years={{ years|join(',') }}&gdps={{ gdp_values|join(',') }}" class="btn-pdf">
+                Download PDF Report
+            </a>
+            <a href="/" class="btn-back">New Analysis</a>
+        </div>
+
+        <div class="scorecard">
+            <h2>Economic Health Score:
+                <span class="grade-{{ stats.economic_score|lower }}">{{ stats.economic_score }}</span>
+            </h2>
+        </div>
+
+        <div class="visualizations">
+            <img src="{{ plot_data }}" alt="GDP Analysis Charts">
+
+            <div id="forecast-chart"></div>
+            <script>
+                const forecastYears = {{ forecast_years| tojson }};
+                const forecastValues = {{ forecast| tojson }};
+
+                Plotly.newPlot('forecast-chart', [{
+                    x: forecastYears,
+                    y: forecastValues,
+                    type: 'scatter',
+                    mode: 'lines+markers',
+                    name: 'GDP Forecast'
+                }], {
+                    title: '5-Year GDP Forecast',
+                    xaxis: { title: 'Year' },
+                    yaxis: { title: 'GDP (Billion USD)' }
+                });
+            </script>
+        </div>
+
+        <div class="statistics">
+            <!-- Statistical tables and growth rates would go here -->
+        </div>
+
+        <div class="comparison-results" id="comparison-results">
+            <!-- Multi-country comparison results would load here -->
+        </div>
+    </div>
+
+    
+
+    <script>
+        // Safe forecast data handling
+        const forecastData = {
+            years: {{ forecast_years| tojson if forecast_years else[] }},
+        values: { { forecast | tojson if forecast else[] } }
+        };
+
+        if (forecastData.years.length > 0 && forecastData.values.length > 0) {
+            Plotly.newPlot('forecast-chart', [{
+                x: forecastData.years,
+                y: forecastData.values,
+                type: 'scatter',
+                mode: 'lines+markers',
+                name: 'GDP Forecast',
+                line: { color: '#FF6B6B' }
+            }], {
+                title: '5-Year GDP Forecast',
+                xaxis: { title: 'Year' },
+                yaxis: { title: 'GDP (Billion USD)' }
+            });
+        } else {
+            document.getElementById('forecast-chart').innerHTML =
+                '<p class="no-forecast">Forecast unavailable: Not enough data points</p>';
+        }
+    </script>
+</body>
+
+</html>
